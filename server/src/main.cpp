@@ -1,42 +1,49 @@
 #include <iostream>
-#include <sys/socket.h>
+///#include <sys/socket.h>
 #include <unistd.h>
 #include <fstream>
+#include "networking/TcpListener.hpp"
+
+// Output stream object for our log file for succesful creation of socket
+  std::ofstream logWfile("server.log", std::ios::app);
 
 
 int main ()
 {
-  int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
-  
 
-// Output stream object for our log file for succesful creation of socket
+  int serverSocketfd = CreateTcpSocket ();
 
-  std::ofstream logWfile("server.log", std::ios::app);
 
- if (serverSocket == -1)
+
+  if (serverSocketfd >= 0)
   {
-    
-    std::cerr << "Socket creation failed\n";
+  std::cout <<  "Main.cpp output socket fd import succsesfull: " << serverSocketfd << '\n';
+  logWfile << "socket fd import succsesfull";
+  }
 
 
-    
-    logWfile << "Socket creation failed\n";
 
+  if (serverSocketfd == -1)
+  {
+    std::cout << "Main.cpp output: The Socket: " << serverSocketfd << "Failed To Create";
+    logWfile << "Main.cpp output: The Socket: " << serverSocketfd << "Failed To Create";
     return 1;
   }
 
 
 
-
- // prints to the terminal that the Socket got made correctly 
+  listenSocketJob(serverSocketfd);  //// The Fd value gets passed to the function that binds the Socket (fd) and listening socket properties(job)
+  if (serverSocketfd >= 0)
+  {
+   // prints to the terminal that the Socket got made correctly 
   std::cout << "Socket creation Succesful. FD: "
-            << serverSocket << '\n';
+            << serverSocketfd << '\n';
+  logWfile << "Main.cpp output: The Socket: " << serverSocketfd << "GOT TO  To Create";
+  }
 
- // send a string messige to logs that the socket was created succesfully 
 
-  logWfile << "Socket creation Succesful. FD: " << serverSocket << '\n';
 
-  close(serverSocket);
+  close(serverSocketfd);
   return 0;
 }
 
