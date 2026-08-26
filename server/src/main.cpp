@@ -32,7 +32,9 @@ int main ()
 
 
 
-  listenSocketJob(serverSocketfd);  //// The Fd value gets passed to the function that binds the Socket (fd) and listening socket properties(job)
+  listenSocketJob(serverSocketfd);  //// The Fd value gets passed to the function that binds the Socket (fd) and socket adress type
+  Startlistening(serverSocketfd);   //// AFter the bind of the sokcet and address type the function get called to pass on the fd to apply listening API to the scoket
+
   if (serverSocketfd >= 0)
   {
    // prints to the terminal that the Socket got made correctly 
