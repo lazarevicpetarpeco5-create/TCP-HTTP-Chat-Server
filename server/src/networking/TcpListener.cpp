@@ -6,6 +6,13 @@
 
 
 
+///// Old School Chat Memory
+
+char textmsgsize[1024];
+
+
+
+
 int CreateTcpSocket () 
 {
 
@@ -49,4 +56,42 @@ int Startlistening (int serverSocketfd)
    }
    return 0;
 }
+
+int StartAccepting (int serverSocketfd)
+{  
+    sockaddr_in ClientAdress{};
+    socklen_t ClientAdressLength = sizeof(ClientAdress);
   
+   int clientaccepted = accept
+    (serverSocketfd,
+        reinterpret_cast<sockaddr*>
+        (&ClientAdress),
+        &ClientAdressLength);
+    
+ if (clientaccepted == -1)       
+ {
+    std::cerr << "Accepting() failed\n";
+    return -1;
+ }
+return clientaccepted;
+}
+
+
+int ReciveData (int clientSocketFd)
+{
+  size_t msgsize = sizeof(textmsgsize);
+
+  int RecevedData = 
+        recv(clientSocketFd,
+        textmsgsize,
+        sizeof(textmsgsize),
+        0);
+
+  if (RecevedData == -1 )
+  {
+    std::cerr << "Recv() failed\n";
+    return -1;
+  }       
+
+  return ;
+}
