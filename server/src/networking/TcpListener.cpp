@@ -8,8 +8,7 @@
 
 ///// Old School Chat Memory
 
-char textmsgsize[1024];
-
+char msg[1024];
 
 
 
@@ -29,11 +28,10 @@ int listenSocketJob (int serverSocketfd)
     sockaddr_in ServerAdress{};
 
     ServerAdress.sin_family = (AF_INET);
-    ServerAdress.sin_port = htons(5000);
+    ServerAdress.sin_port = htons(5001);
     ServerAdress.sin_addr.s_addr = INADDR_ANY;
     
-    if ( bind(
-        serverSocketfd,
+    if (bind(serverSocketfd,
         reinterpret_cast<sockaddr*>(&ServerAdress),
         sizeof(ServerAdress)
         ) == -1 )
@@ -77,21 +75,32 @@ return clientaccepted;
 }
 
 
+
 int ReciveData (int clientSocketFd)
 {
-  size_t msgsize = sizeof(textmsgsize);
+  
 
   int RecevedData = 
         recv(clientSocketFd,
-        textmsgsize,
-        sizeof(textmsgsize),
-        0);
-
+        msg,
+        sizeof(msg),
+        0);   
   if (RecevedData == -1 )
   {
     std::cerr << "Recv() failed\n";
     return -1;
   }       
 
-  return ;
+  return RecevedData;
 }
+
+
+
+void Messigechat(int RecevedData)
+{
+   std::string Messige(msg, RecevedData);
+   std::cout << Messige;
+   
+}
+
+
