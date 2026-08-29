@@ -5,5 +5,8 @@
 #include "networking/client.hpp"
 
 
-int ClientSocket = ClientTcpSocket();
+int clientsocket = ClientTcpSocket();
+
+ConnectToServer (clientsocket);
+
 
