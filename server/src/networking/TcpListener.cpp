@@ -2,7 +2,7 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
-
+#include <string>
 
 
 
@@ -90,7 +90,7 @@ int ReciveData (int clientSocketFd)
     std::cerr << "Recv() failed\n";
     return -1;
   }       
-
+  std::cout << "recv() returned: " << RecevedData << '\n';
   return RecevedData;
 }
 
@@ -98,9 +98,9 @@ int ReciveData (int clientSocketFd)
 
 void Messigechat(int RecevedData)
 {
+   std::cout << "Messigechat was called!\n";
    std::string Messige(msg, RecevedData);
-   std::cout << Messige;
-   
+   std::cout << "HOST Recived: [" << Messige << "]\n";
 }
 
 
