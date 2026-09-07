@@ -24,7 +24,7 @@ int CreateTcpSocket ()
 
 
 int listenSocketJob (int serverSocketfd)
-{
+{   
     sockaddr_in ServerAdress{};
 
     ServerAdress.sin_family = (AF_INET);
@@ -32,15 +32,15 @@ int listenSocketJob (int serverSocketfd)
     ServerAdress.sin_addr.s_addr = INADDR_ANY;
     
     if (bind(serverSocketfd,
-        reinterpret_cast<sockaddr*>(&ServerAdress),
-        sizeof(ServerAdress)
-        ) == -1 )
-        {
-            std::cerr << "bind() failed\n";
-            return 1;
-        }
+    reinterpret_cast<sockaddr*>(&ServerAdress),
+    sizeof(ServerAdress)
+    ) == -1 )
+    {
+    std::cerr << "bind() failed\n";
+    return 1;
+    }
     return 0;    
-}
+  }
 
 int Startlistening (int serverSocketfd)
 {
@@ -57,29 +57,30 @@ int Startlistening (int serverSocketfd)
 
 int StartAccepting (int serverSocketfd)
 {  
+ 
     sockaddr_in ClientAdress{};
     socklen_t ClientAdressLength = sizeof(ClientAdress);
-  
-   int clientaccepted = accept
-    (serverSocketfd,
-        reinterpret_cast<sockaddr*>
-        (&ClientAdress),
-        &ClientAdressLength);
     
- if (clientaccepted == -1)       
- {
+
+    int clientaccepted = accept
+    (serverSocketfd,
+    reinterpret_cast<sockaddr*>
+    (&ClientAdress),
+    &ClientAdressLength);
+    
+   if (clientaccepted == -1)       
+   {
     std::cerr << "Accepting() failed\n";
     return -1;
- }
-return clientaccepted;
+   }
+  return clientaccepted;
+    
 }
 
 
 
 int ReciveData (int clientSocketFd)
 {
-  
-
   int RecevedData = 
         recv(clientSocketFd,
         msg,

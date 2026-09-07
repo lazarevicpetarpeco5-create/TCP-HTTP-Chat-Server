@@ -4,12 +4,21 @@
 #include <fstream>
 #include "networking/client.hpp"
 
-int main ()
+
+int main ()  
 {
+
+
+
 int clientsocket = ClientTcpSocket();
 
-ConnectToServer(clientsocket);
+int connectionresult = ConnectToServer(clientsocket);
 
+
+
+
+Sendingmessige(clientsocket);
+    
 
 return 0;
 }

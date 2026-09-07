@@ -3,7 +3,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <string>
 
+ char message[1024];
 
 
 int ClientTcpSocket () 
@@ -37,6 +39,26 @@ int ConnectToServer (int clientsocket)
         std::cerr << "connect() failed\n";
         return -1;
     }
-   
+    
+    std::cout << "Connected to server!\n";
     return connectionresult;
+}
+
+
+void Sendingmessige (int clientsocket)
+{
+
+ std::string message;
+ std::cout << "Write the message: "; 
+ while(true)
+ {
+ std::getline(std::cin, message);
+
+
+
+
+ ssize_t result = send(clientsocket, message.c_str(), message.size(), 0);
+ std::cout << "User Sent: " << result << '\n';
+ }
+
 }

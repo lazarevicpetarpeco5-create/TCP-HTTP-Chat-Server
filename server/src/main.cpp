@@ -10,7 +10,6 @@
 
 int main ()
 {
-
   int serverSocketfd = CreateTcpSocket ();
 
 
@@ -31,19 +30,22 @@ int main ()
   }
 
 
-
+ 
   listenSocketJob(serverSocketfd);  //// The Fd value gets passed to the function that binds the Socket (fd) and socket adress type
+ 
   Startlistening(serverSocketfd);   //// AFter the bind of the sokcet and address type the function get called to pass on the fd to apply listening API to the scoket
+  
+
   int clientSocketFd = StartAccepting(serverSocketfd); //// make var for the returned fd number,call function, make 2 vars to store adress and length(length us e data type and size of(adress)), tahn make a variable for the accapting socket use accept api
   //  inside the var on the socketfd and use cast for older adress because of code and mark start of memory of client adress and clientadress length 
+
   
   
   /// passes the accepted client and passes data size of bytes into an int var
-  while(true)
-  {
+ 
   int RecevedData = ReciveData(clientSocketFd); ///// the var holding the bytes of the returned data size 
   Messigechat(RecevedData); ///// Using a string object to display and use the actual bytes of our array holding the data and the size of the bytes 
-  }
+  
 
   if (serverSocketfd >= 0)
   {
@@ -56,6 +58,7 @@ int main ()
 
 
   close(serverSocketfd);
+ 
   return 0;
  }
 
