@@ -62,7 +62,8 @@ int StartAccepting (int serverSocketfd)
     socklen_t ClientAdressLength = sizeof(ClientAdress);
     
 
-    int clientaccepted = accept
+    int clientaccepted = 
+    accept
     (serverSocketfd,
     reinterpret_cast<sockaddr*>
     (&ClientAdress),
