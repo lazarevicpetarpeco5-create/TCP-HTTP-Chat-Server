@@ -3,7 +3,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string>
-
+#include <unistd.h>
 
 
 ///// Old School Chat Memory
@@ -106,3 +106,21 @@ void Messigechat(int RecevedData)
 }
 
 
+void HandleClient(int clientSocketFd)
+{
+ while (true)
+  {
+    int RecevedData = ReciveData(clientSocketFd);
+
+    // Stop if client disconnected (0) or error (-1)
+    if (RecevedData <= 0)
+    {
+      break;
+    }
+
+    Messigechat(RecevedData);
+  }
+
+  // Close this client's socket when they disconnect
+  close(clientSocketFd);
+}
