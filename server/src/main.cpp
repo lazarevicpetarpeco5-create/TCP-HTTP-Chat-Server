@@ -43,12 +43,6 @@ int main ()
   std::thread ClientThread (HandleClient, clientSocketFd);
   ClientThread.detach();/// detaches the thread to work standalone while the loop continues to loop allowing the 1st client to stay connected while a thread can accept another one
  
-  /// passes the accepted client and passes data size of bytes into an int var
- 
-  int RecevedData = ReciveData(clientSocketFd); ///// the var holding the bytes of the returned data size 
-  Messigechat(RecevedData); ///// Using a string object to display and use the actual bytes of our array holding the data and the size of the bytes 
-  
-
   if (serverSocketfd >= 0)
   {
    // prints to the terminal that the Socket got made correctly 
